@@ -7,7 +7,7 @@ const PeopleList = props => {
 	const { peoples } = props;
 
  	const items = peoples.map(people => {
- 			<PeopleListItem 
+ 			return <PeopleListItem 
  				key={people.name.first} 
  				people={people} />
  	});

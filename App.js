@@ -1,41 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
+import { createAppContainer } from 'react-navigation';
 
-import React from 'react';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import { Text, View } from 'react-native';
+import PeoplePage from './src/pages/PeoplePage';
+import PeopleDetailPage from './src/pages/PeopleDetailPage';
 
-import Header from './src/components/Header';
-
-import PeopleList from './src/components/PeopleList';
-
-import axios from 'axios';
-
-export default class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      peoples: []
-    };
+const AppNavigator = createStackNavigator({
+  'Main': {
+    screen: PeoplePage
+  },
+  'PeopleDetail': {
+    screen: PeopleDetailPage
   }
+}, {
+  defaultNavigationOptions: {
+    title: 'Pessoas!',
+    headerStyle: {
+      backgroundColor: '#637fb8',
+      borderBottomWidth: 1,
+      borderBottomColor: '#555e70'
+    },
+    headerTitleStyle: {
+      color: 'white',
+      fontSize: 30,
 
-  componentDidMount() {
-    axios
-      .get('https://randomuser.me/api/?nat=br&results=5').then(response => {
-          const { results } = response.data;
-          this.setState({
-            peoples: results
-          })
-        })
+      flexGrow: 1,
+      textAlign: 'center',
+    }
   }
+});
 
-  render(){
-    return (
-      <View>
-        <Header title="Pessoas!" />
-        <PeopleList peoples={ this.state.peoples } />
-      </View>
-    );
-  }
-}
+const AppContainer  = createAppContainer(AppNavigator);
+
+export default AppContainer;

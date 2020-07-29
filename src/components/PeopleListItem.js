@@ -9,7 +9,7 @@ const PeopleListItem = props => {
 	return (
 		<TouchableOpacity onPress={() => {
 			console.log('Clicou em mim!!!', first);
-			navigateToPeopleDetail(); 
+			navigateToPeopleDetail({ people }); 
 		}}>
 		<View key={ first } style={styles.line}>	
 			<Image style={styles.avatar} source={{ uri: people.picture.thumbnail }} />
